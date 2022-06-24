@@ -2,7 +2,6 @@ import {useState} from "react";
 
 import {useDispatch} from "react-redux"
 import {addTodoItem} from "../redux/todos/todosSlice"
-import {nanoid} from "@reduxjs/toolkit"
 
 function Form() {
     const [title, setTitle] = useState("")
@@ -10,7 +9,10 @@ function Form() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(addTodoItem({id: nanoid(), title, completed: false}))
+        if(title === ""){
+            return window.alert("to-do section shold not be empty")
+        }
+        dispatch(addTodoItem({ title }))
         setTitle("")
     }
 
